@@ -1,6 +1,7 @@
+# example/urls.py
 from django.urls import path
 
-from paciente.views import index
+from pacientes.views import index
 
 
 urlpatterns = [

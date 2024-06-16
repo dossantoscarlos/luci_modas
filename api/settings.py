@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'example',
-    'paciente'
+    'pacientes'
 ]
 
 MIDDLEWARE = [
@@ -79,11 +79,22 @@ WSGI_APPLICATION = 'api.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "USER": "default",
+        "PASSWORD": "A8c2XvjdmpWu",
+        "NAME": "verceldb",
+        "HOST": "ep-divine-sun-a4vwxz09-pooler.us-east-1.aws.neon.tech",
+        # "OPTIONS": {
+        #     "service": "pg_service.conf",
+        #     "passfile": ".my_pgpass",
+        # },
     }
 }
 
+#POSTGRES_USER
+#POSTGRES_PASSWORD
+#POSTGRES_HOST
+#POSTGRES_DATABASE
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
