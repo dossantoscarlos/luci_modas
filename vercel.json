@@ -2,8 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "static/admin/(css|js)/(.*)",
-      "dest": "static/$1/$2"
+      "src": "static/(.*)",
+      "dest": "static/$1"
     },
     {
       "src": "/(.*)",
