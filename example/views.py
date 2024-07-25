@@ -1,9 +1,10 @@
 # example/views.py
-from datetime import datetime
 
 from django.http import HttpResponse
 
 def index(request):
-    now = datetime.now()
-    html = f'{ now }'
-    return HttpResponse(html)
+    arr = []
+    for i in range(0,100):
+        arr.append(i)
+
+    return HttpResponse(arr)

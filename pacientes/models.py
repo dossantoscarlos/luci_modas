@@ -1,12 +1,12 @@
 from django.db import models
 
+from .choices import PacienteSexoChoice
+
 # Create your models here.
 
 
 class Paciente(models.Model):
-    class PacienteSexoChoice(models.TextChoices) :
-        MASCULINO = 'M', 'Masculino'
-        FEMININO = 'F', 'Feminino'
+    
 
     nome = models.CharField(max_length=100)
     sobrenome = models.CharField(max_length=100)
