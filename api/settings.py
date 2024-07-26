@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,13 +26,13 @@ SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://django-hello-world-jby4.onrender.com'
+    'https://django-hello-world-jby4.onrender.com'
 ]
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app','django-hello-world-jby4.onrender.com', '0.0.0.0']
 
 CORS_ORIGIN_WHITELIST = [
-    'http://django-hello-word-jby4.onrender.com',
+    'https://django-hello-word-jby4.onrender.com',
 ]
 
 # Application definition
