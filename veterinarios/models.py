@@ -3,11 +3,8 @@ from django.db import models
 from .choices import PessoaSexoChoice
 
 # Create your models here.
-
-
 class Veterinario(models.Model):
     
-
     nome = models.CharField(max_length=100)
     sobrenome = models.CharField(max_length=100)
     cpf = models.CharField(max_length=11, null=True)
