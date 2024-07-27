@@ -1,6 +1,11 @@
 from django.db import models
 
-from .choices import PessoaSexoChoice, SexoPetChoice , PorteChoice
+from .choices import ( 
+    PessoaSexoChoice,
+    SexoPetChoice,
+    PorteChoice,
+    TipoConsulta
+)
 
 # Create your models here.
 class Veterinario(models.Model):
@@ -38,3 +43,13 @@ class Pet(models.Model):
 
     def __str__(self) -> str:
         return self.nome
+
+class Agendamento(models.Model):
+    data = models.DateTimeField()
+    tipo_consulta= models.CharField(max_length=1, choices=TipoConsulta.choices, default=TipoConsulta.CONSULTA)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    veterinario = models.ForeignKey(Veterinario, on_delete=models.CASCADE)     
+
+    def __str__(self) -> str:
+        return self.data
+

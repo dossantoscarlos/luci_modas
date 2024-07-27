@@ -12,3 +12,8 @@ class PorteChoice(models.TextChoices):
     MEDIO = "M", "Medio"
     GRANDE = "G", "Grande"
     PEQUENO = "P", "Pequeno"
+
+class TipoConsulta(models.TextChoices):
+    EXAME = "E", "Exame"
+    CONSULTA = 'C','Consulta'
+    VACINA = "V", "Vacina"
