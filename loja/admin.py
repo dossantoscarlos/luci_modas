@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Produto, Venda
+from .models import Produto, Venda, Cliente
 
 # Register your models here.
 @admin.register(Produto)
@@ -27,3 +27,5 @@ class VendaAdmin(admin.ModelAdmin):
             "fields":["data", "status", "produto"]
         })
     ]
+
+admin.site.register(Cliente)
