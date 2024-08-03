@@ -6,7 +6,9 @@ class Produto(models.Model):
     preco = models.CharField(max_length=100)
     quantidade = models.IntegerField(default=1)
     tipo = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(blank=True, max_length=100)
     cor = models.CharField(max_length=50, blank=True)
+
     modelo = models.CharField(max_length=1, 
         choices=ModeloProdutoChoice.choices,
         default=ModeloProdutoChoice.MASCULINO
@@ -17,10 +19,19 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
+
+class Cliente(models.Model):
+    nome = models.CharField(max_length=100)
+    contato = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.contato
+
 class Venda(models.Model):
     data = models.DateField()
     status = models.CharField(max_length=1, choices=StatusChoice.choices, default=StatusChoice.PAGO)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
