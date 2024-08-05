@@ -5,7 +5,7 @@ from .models import Produto, Venda, Cliente
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ("nome", "tipo","cor","formatted_preco", 'quantidade', 'descricao_longa', 'image_tag')
-    readonly_fields = ('image_tag',)
+    list_filter = ("tipo", "preco", "nome")
     fieldsets = [
         ("Dados do produto",{
             "fields":["nome", "tipo","cor","image","descricao_longa"]
@@ -17,8 +17,6 @@ class ProdutoAdmin(admin.ModelAdmin):
             "fields":['preco']
         })
     ]
-    list_editable = ("tipo", "preco",)
-    list_filter = ("tipo", "preco", "nome")
 
 @admin.register(Venda)
 class VendaAdmin(admin.ModelAdmin):
