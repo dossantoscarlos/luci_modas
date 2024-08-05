@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect as redirect
 
-# Create your views here.
+
+def check_file_exists(request,):
+    return redirect(redirect_to="/admin")

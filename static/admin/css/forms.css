@@ -5,7 +5,7 @@
 .form-row {
     overflow: hidden;
     padding: 10px;
-    font-size: 0.8125rem;
+    font-size: 1rem;
     border-bottom: 1px solid var(--hairline-color);
 }
 

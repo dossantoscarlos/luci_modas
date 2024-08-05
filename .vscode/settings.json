@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "sqlite djnago",
+            "database": "\\\\wsl.localhost\\Debian\\home\\nakiban\\django-hello-world\\db.sqlite3"
+        }
+    ]
+}

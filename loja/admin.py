@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Produto, Venda
+from .models import Produto, Venda, Cliente
 
 # Register your models here.
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ("nome", "tipo","cor","preco", 'quantidade', 'descricao_longa', 'image')
+    list_display = ("nome", "tipo","cor","formatted_preco", 'quantidade', 'descricao_longa', 'image_tag')
+    readonly_fields = ('image_tag',)
     fieldsets = [
         ("Dados do produto",{
             "fields":["nome", "tipo","cor","image","descricao_longa"]
@@ -27,3 +28,5 @@ class VendaAdmin(admin.ModelAdmin):
             "fields":["data", "status", "produto"]
         })
     ]
+
+admin.site.register(Cliente)
