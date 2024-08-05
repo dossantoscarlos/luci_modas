@@ -1,15 +1,24 @@
+import os 
+import uuid
+
+from datetime import datetime
+from babel.numbers import format_currency
+
 from django.db import models
 from django.utils.html import format_html
-from .choices import (ModeloProdutoChoice, StatusChoice)
-import os 
 from django.conf import settings
-from babel.numbers import format_currency
+
+from .choices import (ModeloProdutoChoice, StatusChoice)
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
     contato = models.CharField(max_length=20)
-
-    def __str__(self):
+    
+    def save(self, *args, **kwargs):
+        self.nome = self.nome.upper()
+        super().save(*args, **kwargs)
+    
+    def __str__(self)-> str: 
         return self.nome
 
 class TipoProduto(models.Model):
@@ -73,38 +82,32 @@ class Produto(models.Model):
             )
         ]
     
-class Item(models.Model):
-    produto = models.ForeignKey(Produto,on_delete=models.RESTRICT, verbose_name="Produto")
-    quantidade = models.IntegerField(default=1, verbose_name="Quantidade")
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return self.quantidade
-    
-    class Meta:
-        constraints = [
-            models.CheckConstraint(check=models.Q(quantidade__gte=1), name="quantidade_gte_1"),
-        ]
-
-class Venda(models.Model):
-    data = models.DateField(verbose_name="Data da venda")
+class Pedido(models.Model):
+    codigo = models.UUIDField(unique=True, default=uuid.uuid4, editable=False, verbose_name='Código')
+    data = models.DateTimeField(verbose_name="Data da venda",editable=False, default=datetime.now)
+    cliente = models.OneToOneField(Cliente, on_delete=models.RESTRICT)
+    data_prevista_entrega = models.DateField(verbose_name="Data prevista de entrega",default=datetime.now)
     status = models.CharField(max_length=1, choices=StatusChoice.choices, default=StatusChoice.PAGO, verbose_name="Status")
-    items = models.ManyToManyField(Item, verbose_name="Item")
+    
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return f"{self.produto} - {self.status}"
+        return f"{self.data}"
     
     class Meta:
         verbose_name = "Pedido"
         verbose_name_plural = "Pedidos"
 
-class Encomenda(models.Model):
-    data_solicitacao = models.DateField(verbose_name="Data de solicitação")
-    data_prevista_entrega = models.DateField(verbose_name="Data prevista de entrega")
-    venda = models.ForeignKey(Venda, on_delete=models.CASCADE, verbose_name="Pedido")
-    cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE, verbose_name="Cliente")
+class Item(models.Model):
+    codigo = models.UUIDField(unique=True, default=uuid.uuid4, editable=False, verbose_name="Código")
+    produto = models.ForeignKey(Produto,on_delete=models.RESTRICT, verbose_name="Produto")
+    pedido = models.ForeignKey(Pedido, on_delete=models.RESTRICT, verbose_name="Pedido")
+    quantidade = models.IntegerField(default=1, verbose_name="Quantidade")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.data_prevista_entrega}"
+        return f"{self.codigo}"
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(quantidade__gte=1), name="quantidade_gte_1"),
+        ]
