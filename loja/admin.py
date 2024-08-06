@@ -1,20 +1,18 @@
 from django.contrib import admin
-from .models import (
-    Produto,
-    Pedido,
-    Cliente,
-    Item,
-    TipoProduto,
-)
+from loja.models.pedido import Pedido
+from loja.models.cliente import Cliente
+from loja.models.item import Item
+from loja.models.categoria import Categoria
+from loja.models.produto import Produto
 
 # Register your models here.
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ("nome", "tipo","cor","formatted_preco", 'volume', 'descricao_longa', 'image_tag')
-    list_filter = ("tipo", "preco", "nome")
+    list_display = ("nome", "categoria","cor","formatted_preco", 'volume', 'descricao_curta', 'image_tag')
+    list_filter = ("categoria", "modelo", "nome")
     fieldsets = [
         ("Dados do produto",{
-            "fields":["nome", "tipo","cor","image","descricao_longa"]
+            "fields":["nome", "categoria", "modelo", "cor", "descricao_curta","image","descricao_longa"]
         }),
         ("Estoque", {
             "fields":["volume"]
@@ -45,5 +43,22 @@ class ClienteAdmin(admin.ModelAdmin):
         })
     ]
 
-admin.site.register(Item)
-admin.site.register(TipoProduto)
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display=("codigo", "pedido", 'produto', 'quantidade')
+    fieldsets=[
+        ("Dados do item", {
+            "fields": ["pedido", 'produto', 'quantidade']
+        })
+    ]
+
+
+@admin.register(Categoria)
+class TipoProdutoAdmin(admin.ModelAdmin):
+    list_display = ("nome", "descricao_curta",)
+    fieldsets = [
+        ("Dados do tipo de produto", {
+            "fields": ["nome", "descricao_curta",]
+        })
+    ]
+
