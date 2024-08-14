@@ -1,7 +1,8 @@
 from django.contrib.admin import AdminSite
-
+from django.utils.translation import gettext_lazy
 class CustomSite(AdminSite):
     site_header = 'Brecho Luci'
+    site_title =  gettext_lazy('Brecho Luci')
     
     def get_app_list(self, request):
         app_dict = self._build_app_dict(request)
