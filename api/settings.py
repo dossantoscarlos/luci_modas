@@ -40,12 +40,15 @@ CORS_ORIGIN_WHITELIST = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'api.apps.MyAdminConfig',#'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    
     'django.contrib.messages',
     'django.contrib.staticfiles',
+  
     'loja'
 ]
 
@@ -96,7 +99,7 @@ DATABASES = {
         #     "passfile": os.getenv("OPTIONS_PASSFILE"),
         # },
     },
-    'development': {
+    'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
@@ -149,3 +152,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Optional: If you have additional static files locations
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
