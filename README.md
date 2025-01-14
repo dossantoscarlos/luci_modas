@@ -7,7 +7,7 @@ Aplicação de gerenciamento de estoque e venda simples
 - Cadastro de produto/item
 - Registro da venda
 
-## futuro da aplicação
+## Futuro da aplicação
 
 - Grafico de vendas e cliente
 - Permitir obter graficos e relatorio de vendas por periodos por dia ou datas.
