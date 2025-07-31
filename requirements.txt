@@ -1,6 +1,6 @@
 asgiref==3.8.1
 Babel==2.15.0
-Django==5.1.8
+Django==5.1.10
 django-jazzmin==3.0.1
 django-stubs==5.0.2
 django-stubs-ext==5.0.2
